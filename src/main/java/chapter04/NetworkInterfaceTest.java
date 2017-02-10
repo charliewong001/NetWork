@@ -1,4 +1,4 @@
-package chapter06;
+package chapter04;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;

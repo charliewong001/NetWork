@@ -1,4 +1,4 @@
-package chapter06;
+package chapter04;
 
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
