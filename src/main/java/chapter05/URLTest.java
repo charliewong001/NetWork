@@ -3,6 +3,7 @@ package chapter05;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -90,7 +91,37 @@ public class URLTest {
     public static void getContent() throws IOException {
         URL url = toURL();
         Object obj = url.getContent();
+        System.out.println(obj instanceof InputStream);
         System.out.println(obj);
+    }
+
+    public static void getContent2() throws IOException {
+        URL url = toURL();
+        Class<?>[] clazz = new Class<?>[3];
+        clazz[0] = String.class;
+        clazz[1] = Reader.class;
+        clazz[2] = InputStream.class;
+        Object obj = url.getContent(clazz);
+
+        if (obj instanceof String) {
+            System.out.println("String:");
+            System.out.println(obj);
+        } else if (obj instanceof Reader) {
+            System.out.println("Reader:");
+            Reader r = (Reader) obj;
+            int c = 0;
+            while ((c = r.read()) != -1) {
+                System.out.write(c);
+            }
+        } else if (obj instanceof InputStream) {
+            System.out.println("InputStream:");
+            InputStream is = (InputStream) obj;
+            int c = 0;
+            while ((c = is.read()) != -1) {
+                System.out.write(c);
+            }
+        }
+
     }
 
     public static void openConnection() throws IOException {
@@ -105,8 +136,20 @@ public class URLTest {
         }
     }
 
+    public static void getProtocol() {
+        URL url = construct();
+        String protocol = url.getProtocol();
+        System.out.println(protocol);
+    }
+
+    public static void getFile() throws MalformedURLException {
+        URL url = toURL();
+        String file = url.getFile();
+        System.out.println("file is ============= " + file);
+    }
+
     public static void main(String[] args) throws IOException {
-        openConnection();
+        getFile();
     }
 
 }
