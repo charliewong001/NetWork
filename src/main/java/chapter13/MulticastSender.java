@@ -28,6 +28,7 @@ public class MulticastSender {
             byte[] data = "some data".getBytes("UTF-8");
             DatagramPacket dp = new DatagramPacket(data, data.length, ADDRESS,
                     PORT);
+            ms.setLoopbackMode(false);//false表示接收自己发送的数据
             ms.send(dp);
             Semaphore sp = new Semaphore(0);
             sp.acquire();
