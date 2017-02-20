@@ -7,8 +7,9 @@ import java.net.MulticastSocket;
 public class MulticastReceiver {
 
     public static void main(String[] args) {
+        MulticastSocket ms = null;
         try {
-            MulticastSocket ms = new MulticastSocket(MulticastSender.PORT);
+            ms = new MulticastSocket(MulticastSender.PORT);
             DatagramPacket dp = new DatagramPacket(new byte[1024], 1024);
             ms.joinGroup(MulticastSender.ADDRESS);
             ms.receive(dp);
@@ -17,7 +18,8 @@ public class MulticastReceiver {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-
+            if (ms != null)
+                ms.close();
         }
     }
 
